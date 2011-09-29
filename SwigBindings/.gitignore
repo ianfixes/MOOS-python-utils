@@ -1,0 +1,6 @@
+CMakeFiles
+*.cmake
+Makefile
+mooslib_pythonPYTHON_wrap.cxx
+mooslib_pythonPYTHON_wrap.h
+pyMOOS.py

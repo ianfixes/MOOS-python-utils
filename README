@@ -1,7 +1,19 @@
 A collection of python utilities for MOOS (http://www.robots.ox.ac.uk/~mobile/MOOS/wiki/pmwiki.php)
 and the SWIG bindings which will allow it to run.
 
+Built and tested on Ubuntu Linux; all documentation will assume that OS.
+
 In order to install MOOS-python-utils: 
+ 0. you will need to apt-get install the following (and maybe more):
+      swig 
+      python 
+      libpython2.6 
+      python-mysqldb 
+      python-numpy 
+      python-scipy 
+      python-dev
+      libwxgtk2.8-dev
+      python-wxgtk2.8
  1. place this directory in the MOOS toplevel directory
  2. run "cmake -i ." in the MOOS directory
  3. add "MOOS-python-utils" to the list of "ALSO_BUILD" directories
