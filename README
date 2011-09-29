@@ -18,3 +18,9 @@ In order to install MOOS-python-utils:
  2. run "cmake -i ." in the MOOS directory
  3. add "MOOS-python-utils" to the list of "ALSO_BUILD" directories
  4. build MOOS normally
+ 5. add the SWIG output to the utils directory.  there are probably better
+    ways to do this, but here is how I do it:
+        cd utils/
+        ln -s ../SwigBindings/pyMOOS.py ./
+        ln -s ../../MOOSBin/_pyMOOS.so ./
+
