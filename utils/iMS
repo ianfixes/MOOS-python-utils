@@ -1,0 +1,29 @@
+#!/bin/sh
+###########################################################################
+#    
+#    Written in 2009 by Ian Katz <ijk5@mit.edu>         
+#    Terms: WTFPL (http://sam.zoy.org/wtfpl/) 
+#           See COPYING and WARRANTY files included in this distribution
+#
+###########################################################################
+
+# wrapper file for iMS.py script that hides the stderr output
+#  (basically the MOOSClient output)
+#
+# The program takes 2 command line arguments:
+#  1. the host of the MOOSDB
+#  2. the port of the MOOSDB
+#
+
+
+#REAL_LOG=/home/ijk5/development/python-curses/ims.log
+IMS_LOGFILE="/tmp/ims.$$.log"
+MY_DIR=`dirname $0`
+IMS_SCRIPT=$MY_DIR/iMS.py
+
+export IMS_LOGFILE
+touch $IMS_LOGFILE
+python $IMS_SCRIPT "$@" 2>$IMS_LOGFILE
+#echo -e "\n\n\n\n\n" >> $REAL_LOG
+#cat $IMS_LOGFILE >> $REAL_LOG
+rm $IMS_LOGFILE

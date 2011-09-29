@@ -1,0 +1,89 @@
+%module(directors="1") pyMOOS
+
+%{
+// Includes the header in the wrapper code 
+#include "MOOSGenLib/MOOSGenLibGlobalHelper.h"
+#include "MOOSGenLib/MOOSFileReader.h"
+#include "MOOSGenLib/ProcessConfigReader.h"
+#include "MOOSLIB/MOOSGlobalHelper.h"
+#include "MOOSLIB/MOOSMsg.h"
+#include "MOOSLIB/MOOSCommClient.h"
+#include "MOOSLIB/MOOSCommPkt.h"
+#include "MOOSLIB/MOOSApp.h"
+%}
+
+
+%include stl.i
+%include std_list.i
+%include std_vector.i
+/* instantiate the required template specializations */
+namespace std {
+    %template(MOOSMSG_LIST) list<CMOOSMsg>;
+}
+
+%feature("autodoc", 1);
+
+// generate directors for all classes that have virtual methods
+// see the section in the documentation labeled "Cross language polymorphism"
+%feature("director") CMOOSApp;
+
+
+/* Parse the header file to generate wrappers */
+%include "MOOSGenLib/MOOSGenLibGlobalHelper.h"
+%include "MOOSGenLib/MOOSFileReader.h"
+%include "MOOSGenLib/ProcessConfigReader.h"
+%include "MOOSLIB/MOOSGlobalHelper.h"
+%include "MOOSLIB/MOOSMsg.h"
+%include "MOOSLIB/MOOSCommObject.h"
+%include "MOOSLIB/MOOSCommClient.h"
+%include "MOOSLIB/MOOSCommPkt.h"
+%include "MOOSLIB/MOOSApp.h"
+
+%{
+/* ijk5: trying to support python callback registration 
+ * http://www.swig.org/Doc1.1/HTML/Python.html#n11
+ */
+
+%}
+
+//attach a new method to comms object
+%extend CMOOSCommClient {
+/*
+    static bool PythonDbConnectCallback(void* param)
+    {
+        PyObject *func, *arglist;
+        PyObject *result;
+ 
+        bool bRes = false;
+
+        func = (PyObject *) param;                  //get Python function
+        arglist = Py_BuildValue("()");              //no args
+        result = PyEval_CallObject(func, arglist);  //call python
+        Py_DECREF(arglist);                         //trash arglist
+        if (result) {
+            bRes = true;
+        }
+        Py_XDECREF(result);
+        return bRes;
+
+    }
+
+    //set a python function object as a callback function
+    // note: pyobject * pyfunc is remapped with a typemap
+    void SetOnConnectPyCallBack(PyObject *pyfunc) {
+        if (!PyCallable_Check(pyfunc)) {
+            PyErr_SetString(PyExc_TypeError, "Need a callable object!");
+            return;
+        }
+
+        //THIS LINE HAS A BIG HACK...
+        // the prefix "CMOOSCommClient_" is supposed to be appended by Swig.  i cant get that to work.
+        // check the (crappy) swig documentation for ideas..
+        $self->SetOnConnectCallBack(CMOOSCommClient_PythonDbConnectCallback, (void *) pyfunc, (void *)0);
+        Py_INCREF(pyfunc);
+    }
+*/
+}
+
+
+

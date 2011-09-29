@@ -1,0 +1,28 @@
+#!/bin/sh
+
+###########################################################################
+#    
+#    Written in 2009 by Ian Katz <ijk5@mit.edu>         
+#    Terms: WTFPL (http://sam.zoy.org/wtfpl/) 
+#           See COPYING and WARRANTY files included in this distribution
+#
+###########################################################################
+
+# wrapper file for StartMOOS.py script that hides the stderr output
+#  (basically the MOOSClient output)
+#
+
+
+#REAL_LOG=/home/ijk5/development/python-curses/StartMOOS.log
+STARTMOOS_LOGFILE="/tmp/StartMOOS.$$.log"
+MY_DIR=`dirname $0`
+STARTMOOS_SCRIPT=$MY_DIR/StartMOOS.py
+
+export STARTMOOS_LOGFILE
+touch $STARTMOOS_LOGFILE
+python $STARTMOOS_SCRIPT "$@" 2>$STARTMOOS_LOGFILE
+#echo -e "\n\n\n\n\n" >> $REAL_LOG
+#cat $STARTMOOS_LOGFILE
+#cat $STARTMOOS_LOGFILE >> $REAL_LOG
+#cat $REAL_LOG
+rm $STARTMOOS_LOGFILE
