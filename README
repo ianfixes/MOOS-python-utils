@@ -1,3 +1,5 @@
+AUV tools by Ian Katz (ijk5@mit.edu)
+
 A collection of python utilities for MOOS (http://www.robots.ox.ac.uk/~mobile/MOOS/wiki/pmwiki.php)
 and the SWIG bindings which will allow it to run.
 
